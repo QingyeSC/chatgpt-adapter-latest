@@ -20,7 +20,7 @@ require (
 	github.com/iocgo/sdk v0.0.0-20241203133330-43dcedf3291e
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
 	github.com/patrickmn/go-cache v2.1.0+incompatible
-	github.com/samber/go-gpt-3-encoder v0.3.1
+	github.com/pkoukk/tiktoken-go v0.1.7
 	github.com/sirupsen/logrus v1.9.3
 	github.com/wasmerio/wasmer-go v1.0.5-0.20250109124841-f09913d8a0be
 	google.golang.org/protobuf v1.36.0
