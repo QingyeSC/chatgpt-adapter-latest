@@ -78,7 +78,6 @@ require (
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
 	github.com/samber/do/v2 v2.0.0-beta.7 // indirect
 	github.com/samber/go-type-to-string v1.6.1 // indirect
-	github.com/samber/lo v1.37.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
