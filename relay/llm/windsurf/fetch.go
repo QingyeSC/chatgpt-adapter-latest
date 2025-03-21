@@ -71,8 +71,8 @@ func convertRequest(completion model.Completion, ident, token string) (buffer []
 	modelName := completion.Model[9:] // 去掉 "windsurf/" 前缀
 
 	var maxTokensMap = map[string]int{
-		"claude-3-7-sonnet":       64000,
-		"claude-3-7-sonnet-think": 64000,
+		"claude-3-7-sonnet":       16384,
+		"claude-3-7-sonnet-think": 20480,
 		// 可扩展：添加更多模型配置
 	}
 
