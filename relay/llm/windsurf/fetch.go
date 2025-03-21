@@ -67,9 +67,22 @@ func fetch(ctx context.Context, env *env.Environment, buffer []byte) (response *
 }
 
 func convertRequest(completion model.Completion, ident, token string) (buffer []byte, err error) {
-	if completion.MaxTokens == 0 || completion.MaxTokens > 8192 {
+	// 动态设置 MaxTokens（使用映射表）
+	modelName := completion.Model[9:] // 去掉 "windsurf/" 前缀
+
+	var maxTokensMap = map[string]int{
+		"claude-3-7-sonnet":       64000,
+		"claude-3-7-sonnet-think": 64000,
+		// 可扩展：添加更多模型配置
+	}
+
+	if val, ok := maxTokensMap[modelName]; ok {
+		completion.MaxTokens = val
+	} else {
 		completion.MaxTokens = 8192
 	}
+
+	// 设置其他默认参数
 	if completion.TopK == 0 || completion.TopK > 200 {
 		completion.TopK = 200
 	}
@@ -77,9 +90,10 @@ func convertRequest(completion model.Completion, ident, token string) (buffer []
 		completion.TopP = 0.4
 	}
 	if completion.Temperature == 0 {
-		completion.Temperature = 0.4
+		completion.Temperature = 0.8
 	}
 
+	// 处理 system prompt
 	if len(completion.Messages) > 0 && completion.Messages[0].Is("role", "system") {
 		completion.System = completion.Messages[0].GetString("content")
 		completion.Messages = completion.Messages[1:]
