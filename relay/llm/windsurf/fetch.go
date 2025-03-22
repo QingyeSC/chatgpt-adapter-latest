@@ -129,7 +129,7 @@ func convertRequest(completion model.Completion, ident, token string) (buffer []
 			Id:       ident,
 			Name:     "windsurf",
 			Lang:     "en",
-			Os:       "{\"Os\":\"darwin\",\"Arch\":\"amd64\",\"Release\":\"24.3.0\",\"Version\":\"Darwin Kernel Version 24.3.0: Thu Jan 2 20:22:00 PST 2025; root:xnu-11215.81.4~3/RELEASE_X86_64\",\"Machine\":\"x86_64\",\"Nodename\":\"bincooos-iMac.local\",\"Sysname\":\"Darwin\",\"ProductVersion\":\"15.3.1\"}",
+			Os:       "{\"Os\":\"darwin\",\"Arch\":\"amd64\",\"Release\":\"24.3.0\",\"Version\":\"Darwin Kernel Version 24.3.0: Thu Jan 2 20:22:00 PST 2025; root:xnu-11215.81.4~3/RELEASE_X86_64\",\"Machine\":\"x86_64\",\"Nodename\":\"qingyes-iMac.local\",\"Sysname\":\"Darwin\",\"ProductVersion\":\"15.3.1\"}",
 			Version1: ver1,
 			Version2: ver2,
 			Equi:     "{\"NumSockets\":1,\"NumCores\":6,\"NumThreads\":12,\"VendorID\":\"GenuineIntel\",\"Family\":\"6\",\"Model\":\"158\",\"ModelName\":\"Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz\",\"Memory\":34359738368}",
