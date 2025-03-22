@@ -36,8 +36,8 @@ var (
 		"claude-3-7-sonnet-think": 227,
 	}
 
-	ver1 = "1.40.1"
-	ver2 = "1.4.4"
+	ver1 = "1.40.2"
+	ver2 = "1.5.6"
 
 	finalInstructions = ""
 )
@@ -54,7 +54,7 @@ func fetch(ctx context.Context, env *env.Environment, buffer []byte) (response *
 		Context(ctx).
 		Proxies(proxied).
 		POST("https://server.codeium.com/exa.api_server_pb.ApiServerService/GetChatMessage").
-		Header("user-agent", "connect-go/1.17.0 (go1.23.4 X:nocoverageredesign)").
+		Header("user-agent", "connect-go/1.17.0 (go1.23.6 X:nocoverageredesign)").
 		Header("content-type", "application/connect+proto").
 		Header("connect-protocol-version", "1").
 		Header("accept-encoding", "identity").
@@ -71,7 +71,7 @@ func convertRequest(completion model.Completion, ident, token string) (buffer []
 	modelName := completion.Model[9:] // 去掉 "windsurf/" 前缀
 
 	var maxTokensMap = map[string]int{
-		"claude-3-7-sonnet":       16384,
+		"claude-3-7-sonnet":       20480,
 		"claude-3-7-sonnet-think": 20480,
 		// 可扩展：添加更多模型配置
 	}
@@ -86,10 +86,10 @@ func convertRequest(completion model.Completion, ident, token string) (buffer []
 	if completion.TopK == 0 || completion.TopK > 200 {
 		completion.TopK = 200
 	}
-	if completion.TopP == 0 {
-		completion.TopP = 0.4
+	if completion.TopP == 0 || completion.TopP > 1.0 {
+		completion.TopP = 0.8
 	}
-	if completion.Temperature == 0 {
+	if completion.Temperature == 0 || completion.Temperature > 1.0 {
 		completion.Temperature = 0.8
 	}
 
@@ -283,7 +283,7 @@ func convertRequest(completion model.Completion, ident, token string) (buffer []
 			},
 		},
 		// TODO - 就这样吧，有空再做兼容
-		Tools: []*ChatMessage_Tool{},
+		Tools: []*ChatMessage_Tool{}, // Tools 部分已省去工具参数
 		Choice:         elseOf(strings.Contains(completion.Model[9:], "gpt"), &ChatMessage_ToolChoice{Value: "auto"}, nil),
 		UnknownField13: &ChatMessage_Unknown_Field13{Value: 1},
 		UnknownField15: &ChatMessage_Unknown_Field15{Uuid: uuid.NewString(), Value: 2},
@@ -368,7 +368,7 @@ func genToken(ctx context.Context, proxies, ident string) (token string, err err
 		Context(ctx).
 		Proxies(proxies).
 		POST("https://server.codeium.com/exa.auth_pb.AuthService/GetUserJwt").
-		Header("user-agent", "connect-go/1.17.0 (go1.23.4 X:nocoverageredesign)").
+		Header("user-agent", "connect-go/1.17.0 (go1.23.6 X:nocoverageredesign)").
 		Header("content-type", "application/proto").
 		Header("connect-protocol-version", "1").
 		Header("accept-encoding", "identity").
