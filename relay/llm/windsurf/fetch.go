@@ -37,7 +37,7 @@ var (
 	}
 
 	ver1 = "1.40.2"
-	ver2 = "1.5.6"
+	ver2 = "1.5.9"
 
 	finalInstructions = ""
 )
